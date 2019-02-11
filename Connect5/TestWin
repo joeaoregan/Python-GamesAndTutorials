@@ -1,0 +1,58 @@
+import pygame
+pygame.init()
+pygame.font.init()
+font = pygame.font.SysFont('Comic Sans MS', 24)
+
+SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
+
+win = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
+pygame.display.set_caption("Window Test")
+
+pos1 = (0, 0)
+
+run = True
+while run:
+    pygame.time.delay(100)
+
+    for event in pygame.event.get():
+        if event.type == pygame.MOUSEMOTION:
+            move = pygame.mouse.get_pos()
+
+        if event.type == pygame.MOUSEBUTTONUP:
+            pos1 = pygame.mouse.get_pos()
+
+        if event.type == pygame.QUIT:
+            run = False
+
+    win.fill((0,0,0))
+    pygame.draw.rect(win, (255,0,0), (20,140,200,300), 2)
+    pygame.draw.rect(win, (0,255,0), (220,140,200,300), 2)
+    pygame.draw.rect(win, (0,0,255), (420,140,200,300), 2)
+
+    coordSurface = font.render('Mouse Co-ordinates ' + str(move), False, (100,100,100))
+    win.blit(coordSurface,(20,0))
+
+    if pos1 is not None:
+        lastClicked = font.render('Mouse Clicked: ' + str(pos1), False, (100,100,100))
+        win.blit(lastClicked,(20,50))
+
+    clickText = font.render('Button Clicked: none', False, (100,100,100))
+
+    if 140 < pos1[1] < 440:
+        if 20 < pos1[0] < 220:
+            clickText = font.render('Button Clicked: Red', False, (100,100,100))
+           # win.blit(clickText,(20,80))
+        elif 220 < pos1[0] < 420:
+            clickText = font.render('Button Clicked: Green', False, (100,100,100))
+            #win.blit(clickText,(20,80))
+        elif 420 < pos1[0] < 620:
+            clickText = font.render('Button Clicked: Blue', False, (100,100,100))
+        else:
+            clickText = font.render('Button Clicked: none', False, (100,100,100))
+
+    win.blit(clickText,(20,80))
+
+    pygame.display.update()
+
+
+pygame.quit()

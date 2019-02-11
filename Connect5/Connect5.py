@@ -1,5 +1,6 @@
 # Joe O'Regan
 # 11/02/2019
+# Connect5.py
 
 from array import *
 
@@ -31,7 +32,6 @@ class Game:
 
         if self.board[0][column] != 0:
             print("Error: Column is full")
-            # switch current player
             return False
 
         for r in range(ROW - 1, -1, -1):
@@ -84,17 +84,15 @@ class Game:
 
 
 def main():
-    #finished = False
     print("Connect 5\nby Joe O'Regan\n")
     game = Game()
     continueGame = "y"
 
     while continueGame == "y":
-        #while not finished:
         while not game.getGameOver():
             game.drawBoard()
             game.getPlayerMove()
-            finished = game.checkWin()
+            game.checkWin()
             if not game.getGameOver():
                 game.changePlayer()
 
@@ -102,10 +100,9 @@ def main():
         print("Game Over! Player " + str(game.currentPlayer) + " Is The Winner!!!")
 
         continueGame = str(input("Play Again Y/N: "))
-        print("you entered: " + continueGame)
         if continueGame.lower() == "y":
             game = Game()
-            #finished = False
+    print("\nThank You For Playing Connect 5 by Joe O'Regan. Goodbye!")
 
 
 if __name__ == "__main__":
