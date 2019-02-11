@@ -1,6 +1,12 @@
 # Python Games
 ## Joe O'Regan
 
+## Games
+
+* Snake
+* Tic Tac Toe
+* Connect 5
+
 ---
 
 ## Links

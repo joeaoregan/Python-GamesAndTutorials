@@ -43,44 +43,28 @@ class Game:
         return True
 
     def checkWin(self):
-        #print("Check Diagonals")
         for row in range(0, ROW - 4):
             for col in range(4, COL):
                 if self.board[row][col] != 0 and self.board[row][col] == self.board[row + 1][col - 1] and self.board[row][col] == self.board[row + 2][col - 2] and self.board[row][col] == self.board[row + 3][col - 3] and self.board[row][col] == self.board[row + 4][col - 4]:
                     self.gameOver = True
-                    #if (self.gameOver):
-                     #   print("Win found on vertical /")
                     break
 
             for col in range(0, COL - 4):
                 if self.board[row][col] != 0 and self.board[row][col] == self.board[row + 1][col + 1] and self.board[row][col] == self.board[row + 2][col + 2] and self.board[row][col] == self.board[row + 3][col + 3] and self.board[row][col] == self.board[row + 4][col + 4]:
                     self.gameOver = True
-                   # if (self.gameOver):
-                    #    print("Win found on vertical \\")
 
         if not self.gameOver:
-            #print("Check Rows")
             for row in range(0, ROW):
                 for col in range(0, COL - 4):
                     if self.board[row][col] != 0 and self.board[row][col] == self.board[row][col + 1] and self.board[row][col] == self.board[row][col + 2] and self.board[row][col] == self.board[row][col + 3] and self.board[row][col] == self.board[row][col + 4]:
                         self.gameOver = True
-                       # if (self.gameOver):
-                        #    print("Win found on horizonal")
                         break
 
         if not self.gameOver:
-            #print("Check Columns")
             for row in range(0, ROW - 4):
-                #print("Checking row " + str(row))
                 for col in range(0, COL):
-                    #print("Checking row " + str(row) + str(board[row][col]))
-
-                    #if board[row][col] == player and board[row][col] == board[row + 1][col] and board[row][col] == board[row + 2][col] and board[row][col] == board[row + 3][col] and board[row][col] == board[row + 4][col]:
                     if self.board[row][col] == self.currentPlayer and self.board[row + 1][col] == self.currentPlayer and self.board[row + 2][col] == self.currentPlayer and self.board[row + 3][col] == self.currentPlayer and self.board[row + 4][col] == self.currentPlayer:
-                        print("win")
                         self.gameOver = True
-                       # if (self.gameOver):
-                        #   print("Win found on vertical")
                         break
 
         return self.gameOver
@@ -100,9 +84,6 @@ class Game:
 
 
 def main():
-    # player = PLAYER_2
-    # player = 1
-    # print("Player: " + str(player))
     finished = False
     game = Game()
 
@@ -110,7 +91,7 @@ def main():
         game.drawBoard()
         game.getPlayerMove()
         finished = game.checkWin()
-        if (not game.getGameOver()):
+        if not game.getGameOver():
             game.changePlayer()
 
     game.drawBoard()
