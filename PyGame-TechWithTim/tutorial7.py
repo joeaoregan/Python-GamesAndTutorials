@@ -1,4 +1,4 @@
-# PyGameTutorials
+# PyGame-TechWithTim
 # Tutorial #7: Collisions and Hit Boxes
 # https://www.youtube.com/watch?v=1aGuhUFwvXA&list=PLzMcBGfZo4-lp3jAExUCewBfMx3UZFkh5&index=7
 

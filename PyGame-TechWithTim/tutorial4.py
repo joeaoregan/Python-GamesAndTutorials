@@ -1,4 +1,4 @@
-# PyGameTutorials
+# PyGame-TechWithTim
 # Tutorial #4: Optimisation & OOP
 # https://www.youtube.com/watch?v=xfnRywBv5VM&list=PLzMcBGfZo4-lp3jAExUCewBfMx3UZFkh5&index=4
 

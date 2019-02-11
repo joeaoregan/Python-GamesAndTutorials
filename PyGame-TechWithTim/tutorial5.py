@@ -1,6 +1,6 @@
-# PyGameTutorials
-# Tutorial #6: Enemies
-# https://www.youtube.com/watch?v=vc1pJ8XdZa0&list=PLzMcBGfZo4-lp3jAExUCewBfMx3UZFkh5&index=6
+# PyGame-TechWithTim
+# Tutorial #5: Projectiles
+# https://www.youtube.com/watch?v=PVY46hUp2EM&list=PLzMcBGfZo4-lp3jAExUCewBfMx3UZFkh5&index=5
 
 import pygame
 pygame.init()
@@ -69,54 +69,10 @@ class projectile(object):
         pygame.draw.circle(win, self.colour, (self.x,self.y), self.radius)
 
 
-class enemy(object):
-    walkRight = [pygame.image.load('Art/R1E.png'), pygame.image.load('Art/R2E.png'), pygame.image.load('Art/R3E.png'), pygame.image.load('Art/R4E.png'), pygame.image.load('Art/R5E.png'), pygame.image.load('Art/R6E.png'), pygame.image.load('Art/R7E.png'), pygame.image.load('Art/R8E.png'), pygame.image.load('Art/R9E.png'), pygame.image.load('Art/R10E.png'), pygame.image.load('Art/R11E.png')]
-    walkLeft = [pygame.image.load('Art/L1E.png'), pygame.image.load('Art/L2E.png'), pygame.image.load('Art/L3E.png'), pygame.image.load('Art/L4E.png'), pygame.image.load('Art/L5E.png'), pygame.image.load('Art/L6E.png'), pygame.image.load('Art/L7E.png'), pygame.image.load('Art/L8E.png'), pygame.image.load('Art/L9E.png'), pygame.image.load('Art/L10E.png'), pygame.image.load('Art/L11E.png')]
-
-    def __init__(self,x,y,width,height,end):
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
-        self.end = end
-        self.path = [self.x, self.end]
-        self.walkCount = 0
-        self.vel = 3
-
-    def draw(self, win):
-        self.move()
-        if self.walkCount + 1 >= 33:
-            self.walkCount = 0
-
-        if self.vel > 0:
-            win.blit(self.walkRight[self.walkCount //3], (self.x, self.y))
-            self.walkCount += 1
-        else:
-            win.blit(self.walkLeft[self.walkCount //3], (self.x, self.y))
-            self.walkCount += 1
-        pass
-
-    def move(self):
-        if self.vel > 0:
-            if self.x + self. vel < self.path[1]:
-                self.x += self.vel
-            else:
-                self.vel *= -1
-                self.walkCount = 0
-        else:
-            if self.x - self.vel > self.path[0]:
-                self.x += self.vel
-            else:
-                self.vel *= -1
-                self.walkCount = 0
-        pass
-
-
 def redrawGameWindow():
     # global walkCount
     win.blit(bg, (0,0))     # draw background
     man.draw(win)           # draw player
-    goblin.draw(win)        # draw enemy
     for bullet in bullets:  # draw all bullets in list
         bullet.draw(win)
 
@@ -125,7 +81,6 @@ def redrawGameWindow():
 
 # main loop
 man = player(200, 410, 64, 64)
-goblin = enemy(100, 410, 64, 64, 450)
 bullets = []
 run = True
 while run:

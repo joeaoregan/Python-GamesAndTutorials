@@ -1,4 +1,4 @@
-# PyGameTutorials
+# PyGame-TechWithTim
 # Tutorial #3: Character Animation and Sprites
 # https://www.youtube.com/watch?v=UdsNBIzsmlI&list=PLzMcBGfZo4-lp3jAExUCewBfMx3UZFkh5&index=3
 

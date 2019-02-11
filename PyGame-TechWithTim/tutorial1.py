@@ -1,4 +1,4 @@
-# PyGameTutorials
+# PyGame-TechWithTim
 # Tutorial #1: Basic movement and key presses
 # https://www.youtube.com/watch?v=i6xMBig-pP4&list=PLzMcBGfZo4-lp3jAExUCewBfMx3UZFkh5&index=1
 

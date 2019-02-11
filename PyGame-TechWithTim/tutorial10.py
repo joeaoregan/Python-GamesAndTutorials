@@ -1,4 +1,4 @@
-# PyGameTutorials
+# PyGame-TechWithTim
 # Tutorial #10: Finishing Touches & Next Steps
 # https://www.youtube.com/watch?v=PyblLBlpf0s&index=10&list=PLzMcBGfZo4-lp3jAExUCewBfMx3UZFkh5
 

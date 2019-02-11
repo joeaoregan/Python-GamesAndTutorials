@@ -14,7 +14,7 @@ BLOCK_SIZE = 10
 FPS = 20
 
 gameDisplay = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('Snake Game Tutorial')
+pygame.display.set_caption('Snake-TechWithTim-TheNewBoston Game Tutorial')
 pygame.display.update()
 
 font = pygame.font.SysFont(None, 25)

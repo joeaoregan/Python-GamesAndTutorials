@@ -1,4 +1,4 @@
-# Snake Tutorial Python
+# Snake-TechWithTim-TheNewBoston Tutorial Python
 # https://www.youtube.com/watch?v=5tvER0MT14s&list=PLzMcBGfZo4-kQNQxlrgl5FtncvEbD0urc
 
 import math
