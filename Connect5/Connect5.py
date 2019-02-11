@@ -84,18 +84,28 @@ class Game:
 
 
 def main():
-    finished = False
+    #finished = False
+    print("Connect 5\nby Joe O'Regan\n")
     game = Game()
+    continueGame = "y"
 
-    while not finished:
+    while continueGame == "y":
+        #while not finished:
+        while not game.getGameOver():
+            game.drawBoard()
+            game.getPlayerMove()
+            finished = game.checkWin()
+            if not game.getGameOver():
+                game.changePlayer()
+
         game.drawBoard()
-        game.getPlayerMove()
-        finished = game.checkWin()
-        if not game.getGameOver():
-            game.changePlayer()
+        print("Game Over! Player " + str(game.currentPlayer) + " Is The Winner!!!")
 
-    game.drawBoard()
-    print("Game Over! Player " + str(game.currentPlayer) + " Is The Winner!!!")
+        continueGame = str(input("Play Again Y/N: "))
+        print("you entered: " + continueGame)
+        if continueGame.lower() == "y":
+            game = Game()
+            #finished = False
 
 
 if __name__ == "__main__":
