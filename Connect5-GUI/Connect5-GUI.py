@@ -1,10 +1,16 @@
 # Joe O'Regan
 # 11/02/2019
-# Connect5.py
+# Connect 5 - PyGame
 
-from array import *
+import pygame
 
+SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
 ROW, COL, PLAYER_1, PLAYER_2 = 6, 9, 1, 2
+GREY, RED, GREEN, BLUE, TEXT_COLOUR = (125, 125, 125), (255, 0, 0), (0, 255, 0), (0, 0, 255), (200, 200, 200)  # Colours
+COL_X, COL_Y, COL_W, COL_H, DISK_SIZE = 50, 60, 60, 360, 60
+DISK_X, DISK_Y = int(COL_X + (DISK_SIZE / 2)), int(COL_Y + (DISK_SIZE / 2))
+
+replayButton = (490, 430, 100, 40)
 
 
 class Game:
@@ -83,6 +89,92 @@ class Game:
             self.currentPlayer = PLAYER_1
 
 
+game = Game()
+
+pygame.init()
+pygame.font.init()
+font = pygame.font.SysFont('Comic Sans MS', 24)
+win = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
+pygame.display.set_caption("Window Test")
+
+mousePos = (0, 0)
+selected = "Ready To Start"
+moveText = "Player 1 Move"
+run = True
+while run:
+    pygame.time.delay(100)
+
+    # Check events
+    for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONUP:
+            mousePos = pygame.mouse.get_pos()
+        if event.type == pygame.QUIT:
+            run = False
+
+    win.fill((0,0,0))
+
+    # Draw Rects
+    for i in range (0, 9):
+        pygame.draw.rect(win, RED, (50 + (i * 60), COL_Y, COL_W, COL_H), 2)
+
+    # Select Column and Highlight Selection
+    for i in range(0,9):
+        if not game.gameOver:
+            if COL_Y < mousePos[1] < COL_Y + COL_H:
+                if (COL_X + (DISK_SIZE * i)) < mousePos[0] < (COL_X + DISK_SIZE + (DISK_SIZE * i)):
+                    pygame.draw.rect(win, GREEN, (COL_X + (i * COL_W), COL_Y, COL_W, COL_H), 0)    # highlight selected column
+                    selected = "Player "+str(game.currentPlayer) + " Column Selected: " + str(i)
+
+                    if game.checkCol(i):    # If the column isn't already full (a valid move)
+                        if not game.checkWin():
+                            game.changePlayer()
+                            moveText = "Player " + str(game.currentPlayer) + " Move"
+                        else:
+                            selected = "Game Over. Player " + str(game.currentPlayer) + " Wins!"
+                    else:
+                        moveText = "Player " + str(game.currentPlayer) + " Move. Select A Different Column"
+                    mousePos=(0, 0) # Reset move
+
+                    break
+                else:
+                    selected = "Column Selected: None"
+        else:
+            if replayButton[1] < mousePos[1] < replayButton[1] + replayButton[3]:
+                if replayButton[0] < mousePos[0] < replayButton[0] + replayButton[2]:
+                    game = Game()
+                    selected = "Ready To Start"
+                    moveText = "Player " + str(game.currentPlayer) + " Move"
+
+    if game.gameOver:
+        moveText = "Thank Your For Playing"
+        pygame.draw.rect(win, GREY, (replayButton[0], replayButton[1], replayButton[2], replayButton[3]), 0)
+        font.set_bold(True)
+        replayText = font.render("Replay", True, (225, 225, 225))
+        win.blit(replayText,(replayButton[0]+8, replayButton[1]))
+        font.set_bold(False)
+
+    clickText = font.render(selected, False, TEXT_COLOUR)
+    playerMoveText = font.render(moveText, False, TEXT_COLOUR)
+    win.blit(clickText,(50,20))
+    win.blit(playerMoveText,(50,430))
+
+    # Draw Circles
+    for r in range(0, ROW):
+        for c in range(0, COL):
+            if game.board[r][c] == 0:
+                pygame.draw.circle(win, GREY, (DISK_X + (DISK_SIZE * c), DISK_Y + (DISK_SIZE * r)), 25)
+            if game.board[r][c] == PLAYER_1:
+                pygame.draw.circle(win, RED, (DISK_X + (DISK_SIZE * c), DISK_Y + (DISK_SIZE * r)), 25)
+            if game.board[r][c] == PLAYER_2:
+                pygame.draw.circle(win, BLUE, (DISK_X + (DISK_SIZE * c), DISK_Y + (DISK_SIZE * r)), 25)
+
+    pygame.display.update()
+
+
+pygame.quit()
+
+
+"""
 def main():
     print("Connect 5\nby Joe O'Regan\n")
     game = Game()
@@ -107,3 +199,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
+"""
