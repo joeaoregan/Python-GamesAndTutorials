@@ -1,4 +1,4 @@
-# Python Games
+# Python Games and Tutorials
 ## Joe O'Regan
 
 ## Games
