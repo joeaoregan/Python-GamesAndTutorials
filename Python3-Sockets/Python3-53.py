@@ -1,5 +1,6 @@
 # https://www.youtube.com/watch?v=wzrGwor2veQ
 # Python TCP sockets
+
 import socket
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)       # Create a socket, SOCK_STREAM = TCP connection
