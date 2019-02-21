@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# https://realpython.com/python-sockets/
 
 import socket
 
@@ -17,4 +18,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             data = conn.recv(1024)
             if not data:
                 break
-            conn.sendall(data)
+            conn.sendall(data)      # send() may not send all the data, sendall sends until all data sent or an error

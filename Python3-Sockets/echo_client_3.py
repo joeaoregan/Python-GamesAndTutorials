@@ -2,7 +2,7 @@
 """
 Joe O'Regan
 21/02/2019
-TCP Echo Client with encode/decode
+Looping TCP Echo Client
 """
 
 import socket
@@ -15,10 +15,14 @@ s.connect((HOST, PORT))
 print('TCP Echo Client Connecting To',HOST,':',PORT)
 
 data = input(' -> ')
-s.sendall(data.encode())
 
-data = s.recv(1024).decode()
+while data.lower().strip() != 'exit':
+    s.sendall(data.encode())
 
-print('Received', repr(data))
+    data = s.recv(1024).decode()
+
+    print('Server:', repr(data))
+
+    data = input(' -> ')
 
 s.close()

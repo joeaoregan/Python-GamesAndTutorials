@@ -2,7 +2,7 @@
 """
 Joe O'Regan
 21/02/2019
-TCP Echo Server with encode/decode
+Looping TCP Echo Server
 """
 
 import socket
@@ -20,10 +20,10 @@ print("Connection from: " + str(address))
 
 while True:
     data = conn.recv(1024).decode()
-    print('Received from '+str(address)+': '+str(data))
-
     if not data:
         break
+    print('Received from '+str(address)+': '+str(data))
+
     conn.sendall(data.encode())
 
 conn.close()
