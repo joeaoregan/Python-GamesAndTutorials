@@ -17,6 +17,8 @@ except socket.error as e:
 
 s.listen(5)
 print('Waiting for a connection')
+
+
 def threaded_client(conn):
     conn.send(str.encode('Welcome, type your info\n'))         # Python 2 makes no distinction between byte strings and strings, need to encode/decode for Python 3
 
