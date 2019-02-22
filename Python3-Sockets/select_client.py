@@ -1,23 +1,18 @@
 #!/usr/bin/env python3
 # https://realpython.com/python-sockets/
+# https://github.com/realpython/materials/blob/master/python-sockets-tutorial/multiconn-client.py
 # Select Client
+# Host, Port, and Number of Connections hard coded instead of params
 
 import socket
 import selectors
 import types
 
-sel = selectors.DefaultSelector()
-
 HOST = '127.0.0.1'  # The server's hostname or IP address
-PORT = 8888        # The port used by the server
+PORT = 8888         # The port used by the server
+NUM_CONNS = 2
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((HOST, PORT))
-    s.sendall(b'Hello, world')
-    data = s.recv(1024)
-
-print('Received', repr(data))
-
+sel = selectors.DefaultSelector()
 messages = [b'Message 1 from client.', b'Message 2 from client.']
 
 
@@ -57,3 +52,20 @@ def service_connection(key, mask):
             print('sending', repr(data.outb), 'to connection', data.connid)
             sent = sock.send(data.outb)  # Should be ready to write
             data.outb = data.outb[sent:]
+
+
+start_connections(HOST, int(PORT), int(NUM_CONNS))
+
+try:
+    while True:
+        events = sel.select(timeout=1)
+        if events:
+            for key, mask in events:
+                service_connection(key, mask)
+        # Check for a socket being monitored to continue.
+        if not sel.get_map():
+            break
+except KeyboardInterrupt:
+    print("caught keyboard interrupt, exiting")
+finally:
+    sel.close()
